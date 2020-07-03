@@ -4,11 +4,15 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@Configuration
+@Profile("prod")
 public class AdminProdConfig extends AdminBaseConfig {
 
     @Bean(destroyMethod = "close")
@@ -24,7 +28,10 @@ public class AdminProdConfig extends AdminBaseConfig {
         props.put("prepStmtCacheSqlLimit", "2048");
         props.put("generateSimpleParameterMetadata", true);
         config.setDataSourceProperties(props);
-        config.setDataSourceClassName(dataSourceDriver);
+//        config.setDataSourceClassName(null);
+        config.setJdbcUrl(dataSourceUrl);
+//        config.setDataSourceClassName(MysqlDataSource);
+//        config.setDataSourceClassName(dataSourceDriver);
         config.setMaximumPoolSize(Integer.parseInt(dataSourceMaximumPoolSize));
         config.setMaxLifetime(Integer.parseInt(dataSourceMaxLifetime));
         config.setIdleTimeout(Integer.parseInt(dataSourceIdleTimeout));

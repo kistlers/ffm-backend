@@ -1,0 +1,32 @@
+### all players
+GET http://127.0.0.1:8080/admin/api/players
+
+### all players query
+GET http://127.0.0.1:8080/admin/api/players?query=st
+
+### player id 1
+GET http://127.0.0.1:8080/admin/api/players/1
+
+
+
+### player id 1
+PUT http://127.0.0.1:8080/admin/api/players/1
+Content-Type: application/json
+
+{
+  "firstName": "Severin",
+  "lastName": "renamed",
+  "playerNumber": "29"
+}
+
+
+### player id 5684 (fails)
+PUT http://127.0.0.1:8080/admin/api/players/17
+Content-Type: application/json
+
+{
+  "firstName": "Nicolas",
+  "lastName": "Kistler",
+  "playerNumber": "29"
+}
+

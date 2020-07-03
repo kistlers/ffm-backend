@@ -1,6 +1,8 @@
 package ch.fronis.admin.config;
 
-import ch.fronis.admin.controller.AdminPlayerController;
+import ch.fronis.admin.controller.hibernate.AdminPlayerController;
+import ch.fronis.admin.repository.PlayerRepository;
+import ch.fronis.model.player.Player;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -49,8 +51,8 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
 
     public abstract Flyway flyway();
 
-    @Bean
-    public AdminPlayerController adminPlayerController() {
-        return new AdminPlayerController();
-    }
+//    @Bean
+//    public AdminPlayerController adminPlayerController() {
+//        return new AdminPlayerController();
+//    }
 }

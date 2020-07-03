@@ -4,11 +4,15 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@Configuration
+@Profile("prod")
 public class AppProdConfig extends AppBaseConfig {
 
     @Bean(destroyMethod = "close")
