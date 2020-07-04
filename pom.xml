@@ -25,7 +25,7 @@
         <module>fronis-data</module>
         <module>fronis-model</module>
         <module>fronis-ws-app</module>
-        <module>fronis-ws-admin</module>
+        <module>fronis-admin</module>
         <module>fronis-proxy</module>
     </modules>
 
