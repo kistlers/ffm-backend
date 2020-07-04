@@ -12,7 +12,12 @@
 
     <artifactId>fronis-data</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>Fronis Data</name>
     <description>Fronis Data</description>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
 
 </project>

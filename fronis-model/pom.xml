@@ -12,7 +12,12 @@
 
     <artifactId>fronis-model</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Fronis Models</name>
-    <description>Fronis Models</description>
+    <packaging>jar</packaging>
+    <name>Fronis Model</name>
+    <description>Fronis Model</description>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
 
 </project>
