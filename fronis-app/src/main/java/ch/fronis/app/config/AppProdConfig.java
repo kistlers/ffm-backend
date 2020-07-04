@@ -28,7 +28,7 @@ public class AppProdConfig extends AppBaseConfig {
         props.put("prepStmtCacheSqlLimit", "2048");
         props.put("generateSimpleParameterMetadata", true);
         config.setDataSourceProperties(props);
-        config.setDataSourceClassName(dataSourceDriver);
+        config.setJdbcUrl(dataSourceUrl);
         config.setMaximumPoolSize(Integer.parseInt(dataSourceMaximumPoolSize));
         config.setMaxLifetime(Integer.parseInt(dataSourceMaxLifetime));
         config.setIdleTimeout(Integer.parseInt(dataSourceIdleTimeout));

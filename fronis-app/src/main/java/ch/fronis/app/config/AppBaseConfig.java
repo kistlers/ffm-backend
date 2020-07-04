@@ -27,9 +27,6 @@ public abstract class AppBaseConfig implements SchedulingConfigurer, WebMvcConfi
     @Value("${datasource.password}")
     String dataSourcePassword;
 
-    @Value("${datasource.driverClassName}")
-    String dataSourceDriver;
-
     @Value("${datasource.maximumPoolSize}")
     String dataSourceMaximumPoolSize;
 

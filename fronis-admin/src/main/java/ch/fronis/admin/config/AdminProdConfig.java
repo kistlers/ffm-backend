@@ -28,10 +28,7 @@ public class AdminProdConfig extends AdminBaseConfig {
         props.put("prepStmtCacheSqlLimit", "2048");
         props.put("generateSimpleParameterMetadata", true);
         config.setDataSourceProperties(props);
-//        config.setDataSourceClassName(null);
         config.setJdbcUrl(dataSourceUrl);
-//        config.setDataSourceClassName(MysqlDataSource);
-//        config.setDataSourceClassName(dataSourceDriver);
         config.setMaximumPoolSize(Integer.parseInt(dataSourceMaximumPoolSize));
         config.setMaxLifetime(Integer.parseInt(dataSourceMaxLifetime));
         config.setIdleTimeout(Integer.parseInt(dataSourceIdleTimeout));
