@@ -1,16 +1,15 @@
 ### all players
-GET http://127.0.0.1:8080/admin/api/players
+GET {{baseUrl}}/admin/api/players
 
 ### all players query
-GET http://127.0.0.1:8080/admin/api/players?query=st
+GET {{baseUrl}}/admin/api/players?query=st
 
 ### player id 1
-GET http://127.0.0.1:8080/admin/api/players/1
-
+GET {{baseUrl}}/admin/api/players/1
 
 
 ### player id 1
-PUT http://127.0.0.1:8080/admin/api/players/1
+PUT {{baseUrl}}/admin/api/players/1
 Content-Type: application/json
 
 {
@@ -21,7 +20,7 @@ Content-Type: application/json
 
 
 ### player id 5684 (fails)
-PUT http://127.0.0.1:8080/admin/api/players/17
+PUT {{baseUrl}}/admin/api/players/17
 Content-Type: application/json
 
 {
