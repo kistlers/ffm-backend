@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
 @EnableZuulProxy
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"ch.fronis.proxy.config"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
