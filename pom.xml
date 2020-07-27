@@ -17,7 +17,8 @@
     <description>Fronis Backend</description>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version.source>14</java.version.source>
+        <java.version.target>10</java.version.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -85,9 +86,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <release>${java.version}</release>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <release>${java.version.source}</release>
+                        <source>${java.version.source}</source>
+                        <target>${java.version.target}</target>
                         <compilerArgs>
                             <arg>-parameters</arg>
                         </compilerArgs>

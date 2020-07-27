@@ -28,6 +28,6 @@ public class PlayerSpecification implements Specification<PlayerEntity> {
             predicates.add(criteriaBuilder.or(firstNamePredicate, lastNamePredicate));
         }
 
-        return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
+        return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }
