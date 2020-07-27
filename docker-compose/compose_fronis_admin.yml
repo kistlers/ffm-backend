@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  fronis_admin:
+    image: fronis-admin:0.0.1-SNAPSHOT
+    container_name: fronis_admin
+    ports:
+      - '8182:8182'
