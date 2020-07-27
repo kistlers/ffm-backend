@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   fronis_app:
-    image: fronis-app:0.0.1-SNAPSHOT
+    image: fronis-app:0.0.1
     container_name: fronis_app
     ports:
       - '8181:8181'

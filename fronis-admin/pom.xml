@@ -7,11 +7,11 @@
     <parent>
         <groupId>ch.fronis</groupId>
         <artifactId>fronis-backend</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>fronis-admin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
     <name>Fronis WS Admin</name>
     <description>Fronis WS Admin</description>
@@ -43,14 +43,14 @@
         <dependency>
             <groupId>ch.fronis</groupId>
             <artifactId>fronis-model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>ch.fronis</groupId>
             <artifactId>fronis-data</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
 
         <dependency>

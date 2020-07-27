@@ -11,7 +11,7 @@
 
     <groupId>ch.fronis</groupId>
     <artifactId>fronis-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
     <name>Fronis Backend</name>
     <description>Fronis Backend</description>

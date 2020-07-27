@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   fronis_proxy:
-    image: fronis-proxy:0.0.1-SNAPSHOT
+    image: fronis-proxy:0.0.1
     container_name: fronis_proxy
     ports:
       - '8080:8180'
