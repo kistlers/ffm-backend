@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@SpringBootApplication(scanBasePackages = { "ch.fronis.admin.config" , "ch.fronis.admin.controller.hibernate"})
+@SpringBootApplication(scanBasePackages = {"ch.fronis.admin.config", "ch.fronis.admin.controller.hibernate", "ch.fronis.admin.repository"})
 public class Application {
 
     public static void main(String[] args) {

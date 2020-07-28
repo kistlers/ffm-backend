@@ -5,8 +5,6 @@ import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,16 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v1")
 public class AdminPlayerController {
 
-    @Autowired
-    private PlayerRepository repository;
+    private final PlayerRepository repository;
     private static final Logger logger = LoggerFactory.getLogger(AdminPlayerController.class);
 
-//    public AdminPlayerController(PlayerRepository repository) {
-//        this.repository = repository;
-//    }
+    public AdminPlayerController(PlayerRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/players")
     public ResponseEntity<List<PlayerEntity>> all(@RequestParam(required = false, defaultValue = "0") Integer page,

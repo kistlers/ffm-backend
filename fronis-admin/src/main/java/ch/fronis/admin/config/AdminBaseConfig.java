@@ -43,9 +43,4 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
     public abstract DataSource dataSource();
 
     public abstract Flyway flyway();
-
-//    @Bean
-//    public AdminPlayerController adminPlayerController() {
-//        return new AdminPlayerController();
-//    }
 }

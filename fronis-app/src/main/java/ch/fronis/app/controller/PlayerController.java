@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/v1/player")
+@RequestMapping("/v1")
 public class PlayerController {
 
     public PlayerController() {
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping({"/players"})
     public ResponseEntity<Player> player() {
         Player player = new Player(1, "vorname", "nachame", 17);
         return HeaderHelper.createOKResponseEntity(player, HeaderHelper.NEXT_REFRESH_SECONDS, HeaderHelper.MAX_AGE_SECONDS);

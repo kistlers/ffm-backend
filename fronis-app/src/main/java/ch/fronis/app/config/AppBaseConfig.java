@@ -42,9 +42,4 @@ public abstract class AppBaseConfig implements SchedulingConfigurer, WebMvcConfi
     public abstract DataSource dataSource();
 
     public abstract Flyway flyway();
-
-    @Bean
-    public PlayerController playerController() {
-        return new PlayerController();
-    }
 }
