@@ -13,8 +13,8 @@
     <artifactId>fronis-admin</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>Fronis WS Admin</name>
-    <description>Fronis WS Admin</description>
+    <name>Fronis Admin</name>
+    <description>Fronis Admin</description>
 
     <properties>
         <start-class>ch.fronis.admin.Application</start-class>
