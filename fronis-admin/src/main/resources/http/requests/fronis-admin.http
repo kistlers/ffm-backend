@@ -1,15 +1,15 @@
 ### all players
-GET {{baseUrl}}/admin/api/players
+GET {{baseUrl}}/v1/players
 
 ### all players query
-GET {{baseUrl}}/admin/api/players?query=st
+GET {{baseUrl}}/v1/players?query=st
 
 ### player id 1
-GET {{baseUrl}}/admin/api/players/1
+GET {{baseUrl}}/v1/players/1
 
 
 ### player id 1
-PUT {{baseUrl}}/admin/api/players/1
+PUT {{baseUrl}}/v1/players/1
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 
 ### player id 5684 (fails)
-PUT {{baseUrl}}/admin/api/players/17
+PUT {{baseUrl}}/v1/players/17
 Content-Type: application/json
 
 {

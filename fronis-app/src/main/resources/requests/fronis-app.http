@@ -1,0 +1,8 @@
+### all players
+GET {{baseUrl}}/v1/players
+
+### all players query
+GET {{baseUrl}}/v1/players?query=st
+
+### player id 1
+GET {{baseUrl}}/v1/players/1
