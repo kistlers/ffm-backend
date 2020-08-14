@@ -27,7 +27,6 @@
         <module>fronis-model</module>
         <module>fronis-app</module>
         <module>fronis-admin</module>
-        <module>fronis-proxy</module>
     </modules>
 
     <dependencies>
