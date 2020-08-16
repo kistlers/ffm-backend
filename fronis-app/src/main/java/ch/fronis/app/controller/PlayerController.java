@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/v1")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = {"http://localhost", "https://r22.internet-box.ch"})
 public class PlayerController {
 
     public PlayerController() {
