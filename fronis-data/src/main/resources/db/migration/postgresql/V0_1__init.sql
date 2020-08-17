@@ -1,6 +1,6 @@
 CREATE TABLE t_player
 (
-    pk_player_id  INT(10) AUTO_INCREMENT NOT NULL,
+    pk_player_id  SERIAL,
     first_name    VARCHAR(100)           NOT NULL,
     last_name     VARCHAR(100)           NOT NULL,
     short_name     VARCHAR(100),
