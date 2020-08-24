@@ -8,8 +8,12 @@ public class Player {
     private final String playerNumber;
     private final PlayerPosition position;
     private final String yearOfBirth;
+    private final byte[] image;
 
-    public Player(int id, String firstName, String lastName, String shortName, String playerNumber, PlayerPosition position, String yearOfBirth) {
+    public Player(
+            int id, String firstName, String lastName, String shortName, String playerNumber, PlayerPosition position,
+            String yearOfBirth, byte[] image
+    ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,6 +21,7 @@ public class Player {
         this.playerNumber = playerNumber;
         this.position = position;
         this.yearOfBirth = yearOfBirth;
+        this.image = image;
     }
 
     public int getId() {
@@ -45,5 +50,9 @@ public class Player {
 
     public String getYearOfBirth() {
         return yearOfBirth;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 }

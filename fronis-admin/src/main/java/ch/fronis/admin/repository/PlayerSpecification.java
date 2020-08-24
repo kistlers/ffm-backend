@@ -22,10 +22,13 @@ public class PlayerSpecification implements Specification<PlayerEntity> {
     public Predicate toPredicate(Root<PlayerEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (query != null) {
-            Predicate firstNamePredicate = criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + query.toLowerCase() + "%");
-            Predicate lastNamePredicate = criteriaBuilder.like(criteriaBuilder.lower(root.get("lastName")), "%" + query.toLowerCase() + "%");
-            predicates.add(criteriaBuilder.or(firstNamePredicate, lastNamePredicate));
+        if (query != null && !query.isEmpty()) {
+            predicates.add(criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("firstName")), "%" + query.toLowerCase() + "%"));
+            predicates.add(criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("lastName")), "%" + query.toLowerCase() + "%"));
+            predicates.add(criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("shortName")), "%" + query.toLowerCase() + "%"));
         }
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
