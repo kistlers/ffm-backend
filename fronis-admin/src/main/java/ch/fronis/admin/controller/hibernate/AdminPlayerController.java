@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1")
-@CrossOrigin(value = "**", exposedHeaders = "X-Total-Count")
 public class AdminPlayerController {
 
     private final PlayerRepository playerRepository;
@@ -38,7 +37,7 @@ public class AdminPlayerController {
         Specification<PlayerEntity> spec = new PlayerSpecification(query);
         Page<PlayerEntity> result = playerRepository.findAll(spec, request);
         return ResponseEntity.ok()
-                .header("X-Total-Count", perPage + "/" + result.getTotalElements())
+                .header("Content-Range", perPage + "/" + result.getTotalElements())
                 .body(result.getContent());
     }
 
