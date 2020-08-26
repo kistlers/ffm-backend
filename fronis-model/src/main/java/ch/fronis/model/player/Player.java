@@ -5,14 +5,14 @@ public class Player {
     private final String firstName;
     private final String lastName;
     private final String shortName;
-    private final String playerNumber;
+    private final Integer playerNumber;
     private final PlayerPosition position;
-    private final String yearOfBirth;
-    private final byte[] image;
+    private final Integer yearOfBirth;
+    private final String image;
 
     public Player(
-            int id, String firstName, String lastName, String shortName, String playerNumber, PlayerPosition position,
-            String yearOfBirth, byte[] image
+            int id, String firstName, String lastName, String shortName, Integer playerNumber, PlayerPosition position,
+            Integer yearOfBirth, String image
     ) {
         this.id = id;
         this.firstName = firstName;
@@ -36,7 +36,7 @@ public class Player {
         return lastName;
     }
 
-    public String getPlayerNumber() {
+    public Integer getPlayerNumber() {
         return playerNumber;
     }
 
@@ -48,11 +48,11 @@ public class Player {
         return position;
     }
 
-    public String getYearOfBirth() {
+    public Integer getYearOfBirth() {
         return yearOfBirth;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 }

@@ -3,7 +3,6 @@ package ch.fronis.admin.controller.hibernate;
 import ch.fronis.admin.entity.PlayerEntity;
 import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
-import ch.fronis.model.player.PlayerPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,8 +18,9 @@ import java.util.List;
 @RequestMapping("/v1")
 public class AdminPlayerController {
 
-    private final PlayerRepository playerRepository;
     private static final Logger logger = LoggerFactory.getLogger(AdminPlayerController.class);
+
+    private final PlayerRepository playerRepository;
 
     public AdminPlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
