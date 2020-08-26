@@ -3,6 +3,7 @@ package ch.fronis.admin.controller.hibernate;
 import ch.fronis.admin.entity.PlayerEntity;
 import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
+import ch.fronis.model.player.PlayerPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class AdminPlayerController {
             @RequestParam(required = false, defaultValue = "10") Integer perPage,
             @RequestParam(required = false, defaultValue = "id") String field,
             @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order,
-            @RequestParam(required = false) String query
+            @RequestParam(required = false, value = "q") String query
     ) {
         PageRequest request = PageRequest.of(page, perPage, Sort.by(order, field));
         Specification<PlayerEntity> spec = new PlayerSpecification(query);
@@ -45,6 +46,11 @@ public class AdminPlayerController {
     public PlayerEntity one(@PathVariable Integer id) throws RuntimeException {
         return playerRepository
                 .findById(id).orElseThrow(() -> new RuntimeException(String.format("player with id=%d not found", id)));
+    }
+
+    @PostMapping("/players")
+    public PlayerEntity newPushRegion(@RequestBody PlayerEntity newPlayer) {
+        return playerRepository.save(newPlayer);
     }
 
     @PutMapping("/players/{id}")

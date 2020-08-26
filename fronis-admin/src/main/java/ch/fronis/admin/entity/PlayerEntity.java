@@ -1,5 +1,7 @@
 package ch.fronis.admin.entity;
 
+import ch.fronis.admin.entity.convert.ImageConverter;
+import ch.fronis.model.image.Image;
 import ch.fronis.model.player.PlayerPosition;
 
 import javax.persistence.*;
@@ -31,8 +33,11 @@ public class PlayerEntity {
     @Column(name = "year_of_birth")
     private String yearOfBirth;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "image")
-    private byte[] image;
+    @Convert(converter = ImageConverter.class)
+    private Image image;
 
     public int getId() {
         return id;
@@ -90,11 +95,11 @@ public class PlayerEntity {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public byte[] getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 }
