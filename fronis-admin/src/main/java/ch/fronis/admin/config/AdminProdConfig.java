@@ -39,7 +39,7 @@ public class AdminProdConfig extends AdminBaseConfig {
     @Bean
     @Override
     public Flyway flyway() {
-        Flyway flyWay = Flyway.configure().dataSource(dataSource()).locations("classpath:/db/migration/postgresql").load();
+        Flyway flyWay = Flyway.configure().dataSource(dataSource()).locations("classpath:/db/migration/mysql").load();
         flyWay.migrate();
         return flyWay;
     }
