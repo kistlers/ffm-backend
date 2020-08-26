@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %p [%c] - &lt;%m&gt;%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="logfile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+        <File>fronis-admin.log</File>
+        <encoder>
+            <pattern>%d %p [%c] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>3</maxIndex>
+            <FileNamePattern>fronis-admin.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>512KB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <logger name="ch.fronis" level="DEBUG"/>
+    <!--<logger name="org.springframework.web" level="DEBUG" />  -->
+    <!-- <logger name="org.springframework.jdbc.core" level="TRACE" /> -->
+    <root level="INFO">
+        <appender-ref ref="logfile"/>
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

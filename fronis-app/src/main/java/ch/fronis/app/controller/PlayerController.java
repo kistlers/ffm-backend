@@ -3,36 +3,37 @@ package ch.fronis.app.controller;
 import ch.fronis.app.config.HeaderHelper;
 import ch.fronis.model.player.Player;
 import ch.fronis.model.player.PlayerPosition;
+import ch.fronis.service.player.PlayerDataService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/v1")
 public class PlayerController {
 
-    public PlayerController() {
+    private final PlayerDataService playerDataService;
+
+    public PlayerController(PlayerDataService playerDataService) {
+        this.playerDataService = playerDataService;
     }
 
     @GetMapping({"/players"})
     public ResponseEntity<List<Player>> players() {
-        List<Player> players = new ArrayList<>();
-        players.add(new Player(1, "Die", "Mauer", "Wand", "1", PlayerPosition.GOAL, "1985"));
-        players.add(new Player(2, "Shala", "Barrera", "Barry", "65", PlayerPosition.FIELD, "1997"));
-        players.add(new Player(3, "Jeanna", "Schmal", "Jeanny", "27", PlayerPosition.FIELD, "1990"));
-        players.add(new Player(4, "Leon", "Rogol", "Leo", "21", PlayerPosition.FIELD, "1990"));
-        players.add(new Player(5, "Jeanna", "Schmal", "Jeanny", "27", PlayerPosition.FIELD, "1990"));
-        players.add(new Player(6, "Shala", "Barrera", "Barry", "65", PlayerPosition.FIELD, "1997"));
-        players.add(new Player(7, "Jeanna", "Schmal", "Jeanny", "27", PlayerPosition.FIELD, "1990"));
-        players.add(new Player(8, "Caren", "Rials", "Carry", "27", PlayerPosition.FIELD, "1990"));
-        players.add(new Player(9, "Coach", "Steve", "Steve", "", PlayerPosition.STAFF, "1990"));
-
+        List<Player> players = playerDataService.getAllPlayers();
         return HeaderHelper
                 .createOKResponseEntity(players, HeaderHelper.NEXT_REFRESH_SECONDS, HeaderHelper.MAX_AGE_SECONDS);
+    }
+
+    @GetMapping({"/players/{id}"})
+    public ResponseEntity<Player> player(@PathVariable Integer id) {
+        Player player = playerDataService.getPlayer(id);
+        return HeaderHelper
+                .createOKResponseEntity(player, HeaderHelper.NEXT_REFRESH_SECONDS, HeaderHelper.MAX_AGE_SECONDS);
     }
 }
