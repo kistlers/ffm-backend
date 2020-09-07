@@ -3,6 +3,7 @@ package ch.fronis.admin.controller.hibernate;
 import ch.fronis.admin.entity.PlayerEntity;
 import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1")
@@ -45,7 +51,7 @@ public class AdminPlayerController {
     @GetMapping("/players/{id}")
     public PlayerEntity one(@PathVariable Integer id) throws RuntimeException {
         return playerRepository
-                .findById(id).orElseThrow(() -> new RuntimeException(String.format("player with id=%d not found", id)));
+                .findById(id).orElseThrow(() -> new RuntimeException(String.format("Cannot handle player GET request. Player with id=%d not found", id)));
     }
 
     @PostMapping("/players")
@@ -63,10 +69,6 @@ public class AdminPlayerController {
             player.setPosition(newPlayer.getPosition());
             player.setImage(newPlayer.getImage());
             return playerRepository.save(player);
-        }).orElseGet(() -> {
-            logger.warn("cannot handle player put request. player with id=" + id + " not found");
-            // user creation on put not enabled, do nothing
-            return null;
-        });
+        }).orElseThrow(() -> new RuntimeException(String.format("Cannot handle player PUT request. Player with id=%d not found", id)));
     }
 }
