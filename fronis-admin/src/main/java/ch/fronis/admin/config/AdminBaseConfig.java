@@ -61,6 +61,7 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
+        config.addAllowedOrigin("https://r22.internet-box.ch/");
         config.addAllowedOrigin("http://localhost:3006");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
