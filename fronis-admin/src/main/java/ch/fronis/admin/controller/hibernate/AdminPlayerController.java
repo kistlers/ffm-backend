@@ -3,6 +3,7 @@ package ch.fronis.admin.controller.hibernate;
 import ch.fronis.admin.entity.PlayerEntity;
 import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
+import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,24 +36,25 @@ public class AdminPlayerController {
 
     @GetMapping("/players")
     public ResponseEntity<List<PlayerEntity>> all(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer perPage,
-            @RequestParam(required = false, defaultValue = "id") String field,
-            @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order,
-            @RequestParam(required = false, value = "q") String query
+        @RequestParam(required = false, defaultValue = "0") Integer page,
+        @RequestParam(required = false, defaultValue = "10") Integer perPage,
+        @RequestParam(required = false, defaultValue = "id") String field,
+        @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order,
+        @RequestParam(required = false, value = "q") String query
     ) {
         PageRequest request = PageRequest.of(page, perPage, Sort.by(order, field));
         Specification<PlayerEntity> spec = new PlayerSpecification(query);
         Page<PlayerEntity> result = playerRepository.findAll(spec, request);
         return ResponseEntity.ok()
-                .header("Content-Range", perPage + "/" + result.getTotalElements())
-                .body(result.getContent());
+            .header("Content-Range", perPage + "/" + result.getTotalElements())
+            .body(result.getContent());
     }
 
     @GetMapping("/players/{id}")
     public PlayerEntity one(@PathVariable Integer id) throws RuntimeException {
         return playerRepository
-                .findById(id).orElseThrow(() -> new RuntimeException(String.format("Cannot handle player GET request. Player with id=%d not found", id)));
+            .findById(id).orElseThrow(() -> new RuntimeException(String
+                .format("Cannot handle player GET request. Player with id=%d not found", id)));
     }
 
     @PostMapping("/players")
@@ -60,15 +63,24 @@ public class AdminPlayerController {
     }
 
     @PutMapping("/players/{id}")
-    public PlayerEntity replaceUser(@RequestBody PlayerEntity newPlayer, @PathVariable Integer id) {
-        return playerRepository.findById(id).map(player -> {
-            player.setFirstName(newPlayer.getFirstName());
-            player.setLastName(newPlayer.getLastName());
-            player.setShortName(newPlayer.getShortName());
-            player.setPlayerNumber(newPlayer.getPlayerNumber());
-            player.setPosition(newPlayer.getPosition());
-            player.setImage(newPlayer.getImage());
-            return playerRepository.save(player);
-        }).orElseThrow(() -> new RuntimeException(String.format("Cannot handle player PUT request. Player with id=%d not found", id)));
+    public PlayerEntity replaceUser(@RequestBody PlayerEntity newPlayer, @PathVariable Integer id)
+        throws PacketTooBigException {
+        try {
+            return playerRepository.findById(id).map(player -> {
+                player.setFirstName(newPlayer.getFirstName());
+                player.setLastName(newPlayer.getLastName());
+                player.setShortName(newPlayer.getShortName());
+                player.setPlayerNumber(newPlayer.getPlayerNumber());
+                player.setPosition(newPlayer.getPosition());
+                player.setImage(newPlayer.getImage());
+                return playerRepository.save(player);
+            }).orElseThrow(() -> new RuntimeException(String
+                .format("Cannot handle player PUT request. Player with id=%d not found", id)));
+        } catch (JpaSystemException e) {
+            if (PacketTooBigException.class.equals(e.getCause().getClass())) {
+                throw new PacketTooBigException("Max image size exceeded. Upload a smaller image.");
+            }
+            throw e;
+        }
     }
 }
