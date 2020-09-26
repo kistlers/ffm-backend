@@ -16,12 +16,11 @@ public class PlayerRowMappers {
             int id = resultSet.getInt("pk_player_id");
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
-            String shortName = resultSet.getString("short_name");
             Integer playerNumber = resultSet.getInt("player_number");
             PlayerPosition position = PlayerPosition.fromString(resultSet.getString("position"));
             Integer yearOfBirth = resultSet.getInt("year_of_birth");
             String image = resultSet.getString("image");
-            return new Player(id, firstName, lastName, shortName, playerNumber, position, yearOfBirth, image);
+            return new Player(id, firstName, lastName, playerNumber, position, yearOfBirth, image);
         }
     }
 }

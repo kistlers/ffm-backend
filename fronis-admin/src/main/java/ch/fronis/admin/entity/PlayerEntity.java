@@ -20,9 +20,6 @@ public class PlayerEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "short_name")
-    private String shortName;
-
     @Column(name = "player_number")
     private Integer playerNumber;
 
@@ -61,14 +58,6 @@ public class PlayerEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     public Integer getPlayerNumber() {

@@ -69,7 +69,6 @@ public class AdminPlayerController {
             return playerRepository.findById(id).map(player -> {
                 player.setFirstName(newPlayer.getFirstName());
                 player.setLastName(newPlayer.getLastName());
-                player.setShortName(newPlayer.getShortName());
                 player.setPlayerNumber(newPlayer.getPlayerNumber());
                 player.setPosition(newPlayer.getPosition());
                 player.setImage(newPlayer.getImage());
