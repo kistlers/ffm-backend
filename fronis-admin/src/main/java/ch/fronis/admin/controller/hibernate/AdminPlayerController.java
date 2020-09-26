@@ -3,6 +3,7 @@ package ch.fronis.admin.controller.hibernate;
 import ch.fronis.admin.entity.PlayerEntity;
 import ch.fronis.admin.repository.PlayerRepository;
 import ch.fronis.admin.repository.PlayerSpecification;
+import ch.fronis.model.reactadmin.DeletedResponse;
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import java.util.List;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,9 +79,18 @@ public class AdminPlayerController {
                 .format("Cannot handle player PUT request. Player with id=%d not found", id)));
         } catch (JpaSystemException e) {
             if (PacketTooBigException.class.equals(e.getCause().getClass())) {
+                logger
+                    .info("Max image size exceeded. Upload a smaller image. (playerId=" + id + ")");
                 throw new PacketTooBigException("Max image size exceeded. Upload a smaller image.");
             }
             throw e;
         }
+    }
+
+    @DeleteMapping("/players/{id}")
+    public ResponseEntity<DeletedResponse> deleteAlert(@PathVariable Integer id) {
+        playerRepository.deleteById(id);
+        logger.info("deleted player with id: " + id);
+        return ResponseEntity.ok().body(new DeletedResponse(id));
     }
 }
