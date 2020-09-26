@@ -23,9 +23,6 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
     @Value("${ws.baseUrl}")
     String baseUrl;
 
-    @Value("${ws.authBaseUrl}")
-    String authBaseUrl;
-
     @Value("${datasource.url}")
     String dataSourceUrl;
 
@@ -56,19 +53,19 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
         interceptorRegistry.addInterceptor(new LogRequestInterceptor());
     }
 
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://r22.internet-box.ch/");
-        config.addAllowedOrigin("http://localhost:3006");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        config.addExposedHeader("Content-Range");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<CorsFilter> corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("https://r22.internet-box.ch/");
+//        config.addAllowedOrigin("http://localhost:3006");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("*");
+//        config.addExposedHeader("Content-Range");
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+//        bean.setOrder(0);
+//        return bean;
+//    }
 }
