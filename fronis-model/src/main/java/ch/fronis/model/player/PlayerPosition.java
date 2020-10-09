@@ -1,16 +1,18 @@
 package ch.fronis.model.player;
 
 public enum PlayerPosition {
-    STAFF, GOAL, FIELD;
+    STAFF,
+    GOAL,
+    FIELD;
 
     public static PlayerPosition fromString(String value) {
-        if (value.equalsIgnoreCase("STAFF")) {
+        if ("STAFF".equalsIgnoreCase(value)) {
             return PlayerPosition.STAFF;
         }
-        if (value.equalsIgnoreCase("GOAL")) {
+        if ("GOAL".equalsIgnoreCase(value)) {
             return PlayerPosition.GOAL;
         }
-        if (value.equalsIgnoreCase("FIELD")) {
+        if ("FIELD".equalsIgnoreCase(value)) {
             return PlayerPosition.FIELD;
         }
         throw new IllegalArgumentException("Cannot convert " + value + " to PlayerPosition enum");

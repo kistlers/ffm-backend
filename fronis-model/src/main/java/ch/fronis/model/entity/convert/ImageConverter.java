@@ -1,14 +1,12 @@
-package ch.fronis.admin.entity.convert;
+package ch.fronis.model.entity.convert;
 
 import ch.fronis.model.image.Image;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import javax.persistence.AttributeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.AttributeConverter;
-import java.io.IOException;
-import java.util.Map;
 
 public class ImageConverter implements AttributeConverter<Image, String> {
 
@@ -36,5 +34,4 @@ public class ImageConverter implements AttributeConverter<Image, String> {
 
         return null;
     }
-
 }

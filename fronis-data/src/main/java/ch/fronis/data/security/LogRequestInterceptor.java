@@ -1,14 +1,18 @@
-package ch.fronis.service.security;
+package ch.fronis.data.security;
 
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class LogRequestInterceptor implements HandlerInterceptor, Filter {
 
@@ -17,7 +21,11 @@ public class LogRequestInterceptor implements HandlerInterceptor, Filter {
     private static final Logger logger = LoggerFactory.getLogger(LogRequestInterceptor.class);
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+    public void postHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
+            ModelAndView modelAndView) {
         log(request, response);
     }
 
@@ -28,11 +36,20 @@ public class LogRequestInterceptor implements HandlerInterceptor, Filter {
         }
         String userName = "N/A";
         try {
-//            userName = SecurityHelper.getUserName();
+            //            userName = SecurityHelper.getUserName();
         } catch (Exception ignored) {
         }
-        logger.info("Request: " + request.getRequestURI() + " | Method: " + request.getMethod() + " | HTTP Status: " +
-                    response.getStatus() + " | IP: " + ipAddress + " | userName: " + userName);
+        logger.info(
+                "Request: "
+                        + request.getRequestURI()
+                        + " | Method: "
+                        + request.getMethod()
+                        + " | HTTP Status: "
+                        + response.getStatus()
+                        + " | IP: "
+                        + ipAddress
+                        + " | userName: "
+                        + userName);
     }
 
     @Override
@@ -50,5 +67,5 @@ public class LogRequestInterceptor implements HandlerInterceptor, Filter {
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException { }
+    public void init(FilterConfig arg0) throws ServletException {}
 }

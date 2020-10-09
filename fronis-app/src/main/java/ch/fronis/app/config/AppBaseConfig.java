@@ -1,18 +1,14 @@
 package ch.fronis.app.config;
 
-import ch.fronis.service.player.JDBCPlayerDataService;
-import ch.fronis.service.player.PlayerDataService;
-import ch.fronis.service.security.LogRequestInterceptor;
+import ch.fronis.data.security.LogRequestInterceptor;
+import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableScheduling
@@ -49,10 +45,5 @@ public abstract class AppBaseConfig implements SchedulingConfigurer, WebMvcConfi
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
         interceptorRegistry.addInterceptor(new LogRequestInterceptor());
-    }
-
-    @Bean
-    public PlayerDataService playerDataService() {
-        return new JDBCPlayerDataService(dataSource());
     }
 }

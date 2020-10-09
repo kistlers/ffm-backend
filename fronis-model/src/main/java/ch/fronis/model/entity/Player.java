@@ -1,13 +1,22 @@
-package ch.fronis.admin.entity;
+package ch.fronis.model.entity;
 
-import ch.fronis.admin.entity.convert.ImageConverter;
+import ch.fronis.model.entity.convert.ImageConverter;
 import ch.fronis.model.image.Image;
 import ch.fronis.model.player.PlayerPosition;
-
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity(name = "t_player")
-public class PlayerEntity {
+public class Player {
 
     @Id
     @Column(name = "pk_player_id")
