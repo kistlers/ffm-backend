@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @SpringBootApplication(
-        scanBasePackages = {"ch.fronis.admin.config", "ch.fronis.admin.hibernate"})
+        scanBasePackages = {"ch.fronis.admin.config", "ch.fronis.admin.controller"})
 @EntityScan("ch.fronis.model.entity")
 @EnableJpaRepositories("ch.fronis.data.repository")
 public class Application {
