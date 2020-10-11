@@ -1,6 +1,6 @@
 package ch.fronis.model.entity;
 
-import ch.fronis.model.entity.convert.ImageConverter;
+import ch.fronis.model.entity.convert.Base64ImageConverter;
 import ch.fronis.model.image.Image;
 import ch.fronis.model.player.PlayerPosition;
 import javax.persistence.Basic;
@@ -42,7 +42,7 @@ public class Player {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "image")
-    @Convert(converter = ImageConverter.class)
+    @Convert(converter = Base64ImageConverter.class)
     private Image image;
 
     public int getId() {
