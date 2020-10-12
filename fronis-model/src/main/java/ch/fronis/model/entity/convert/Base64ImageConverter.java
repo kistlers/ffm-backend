@@ -13,7 +13,10 @@ public class Base64ImageConverter implements AttributeConverter<Image, byte[]> {
 
     @Override
     public byte[] convertToDatabaseColumn(Image image) {
-        var base64Png = image.getData() == null ? defaultBase64Png() : image.getData();
+        var base64Png = defaultBase64Png();
+        if (image != null && image.getData() != null) {
+            base64Png = image.getData();
+        }
         return Base64.getDecoder().decode(base64Png.replaceFirst("data:image/png;base64,", ""));
     }
 
