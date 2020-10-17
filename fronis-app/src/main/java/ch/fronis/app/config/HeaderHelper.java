@@ -1,12 +1,12 @@
 package ch.fronis.app.config;
 
-import org.springframework.http.ResponseEntity;
-
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.TimeZone;
+import org.springframework.http.ResponseEntity;
 
 public class HeaderHelper {
 
@@ -19,9 +19,17 @@ public class HeaderHelper {
     private static final String NEXT_REFRESH = "X-Next-Refresh";
     private static final String MAX_AGE = "max-age";
 
+    private HeaderHelper() {
+        // only static
+    }
 
     public static <T> ResponseEntity<T> createOKResponseEntity(T body, int nextRefreshSeconds, int maxAgeSeconds) {
-        return ResponseEntity.ok().header(CACHE_CONTROL, MAX_AGE + "=" + maxAgeSeconds).header(NEXT_REFRESH, createNextRefreshValue(nextRefreshSeconds)).body(body);
+        return ResponseEntity.ok().header(CACHE_CONTROL, MAX_AGE + "=" + maxAgeSeconds)
+            .header(NEXT_REFRESH, createNextRefreshValue(nextRefreshSeconds)).body(body);
+    }
+
+    public static <T> ResponseEntity<T> createOKResponseEntityDefaultCacheControl(T body) {
+        return createOKResponseEntity(body, NEXT_REFRESH_SECONDS, MAX_AGE_SECONDS);
     }
 
     private static String createNextRefreshValue(int nextRefreshSeconds) {
@@ -29,12 +37,12 @@ public class HeaderHelper {
     }
 
     private static String formatHeaderDate(Date date) {
-        SimpleDateFormat sdf = headerDateFormatter.get();
-        if (sdf == null) {
-            sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-            headerDateFormatter.set(sdf);
-        }
+        var sdf = Optional.ofNullable(headerDateFormatter.get()).orElseGet(() -> {
+            var simpleDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            headerDateFormatter.set(simpleDateFormat);
+            return simpleDateFormat;
+        });
         return sdf.format(date);
     }
 }
