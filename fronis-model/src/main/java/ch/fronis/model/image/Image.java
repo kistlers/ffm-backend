@@ -1,6 +1,8 @@
 package ch.fronis.model.image;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
 
     private String data;
 
