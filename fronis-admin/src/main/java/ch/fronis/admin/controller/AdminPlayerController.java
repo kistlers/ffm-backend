@@ -73,6 +73,7 @@ public class AdminPlayerController {
                     player.setLastName(newPlayer.getLastName());
                     player.setPlayerNumber(newPlayer.getPlayerNumber());
                     player.setPosition(newPlayer.getPosition());
+                    player.setYearOfBirth(newPlayer.getYearOfBirth());
                     player.setImage(newPlayer.getImage());
                     return playerRepository.save(player);
                 })
