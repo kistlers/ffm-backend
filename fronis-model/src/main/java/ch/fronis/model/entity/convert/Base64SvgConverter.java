@@ -17,7 +17,6 @@ public class Base64SvgConverter implements AttributeConverter<Image, byte[]> {
         if (image == null || image.getData() == null) {
             return null;
         }
-        logger.debug(image.getData());
         return Base64.getDecoder().decode(image.getData().replaceFirst("data:image/svg\\+xml;base64,", ""));
     }
 
