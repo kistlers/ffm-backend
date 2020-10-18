@@ -31,13 +31,6 @@ public class PlayerController {
         var players = playerRepository.findAllByOrderByPlayerNumberAsc().stream()
             .sorted(Comparator.comparing(Player::getPlayerNumber, Comparator.nullsLast(Comparator.naturalOrder())))
             .collect(Collectors.toList());
-        return HeaderHelper
-            .createOKResponseEntity(players, HeaderHelper.NEXT_REFRESH_SECONDS, HeaderHelper.MAX_AGE_SECONDS);
-    }
-
-    @GetMapping("/players/{id}")
-    public ResponseEntity<Player> player(@PathVariable Integer id) throws NotFoundException {
-        var player = playerRepository.findById(id).orElseThrow(NotFoundException::new);
-        return HeaderHelper.createOKResponseEntityDefaultCacheControl(player);
+        return HeaderHelper.createOKResponseEntityDefaultCacheControl(players);
     }
 }
