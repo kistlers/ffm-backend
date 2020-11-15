@@ -6,15 +6,15 @@
 
     <parent>
         <groupId>ch.fronis</groupId>
-        <artifactId>fronis-backend</artifactId>
+        <artifactId>ffm-backend</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fronis-data</artifactId>
+    <artifactId>ffm-data</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>Fronis Data</name>
-    <description>Fronis Data</description>
+    <name>FFM Data</name>
+    <description>FFM Data</description>
 
     <dependencies>
         <dependency>
@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>ch.fronis</groupId>
-            <artifactId>fronis-model</artifactId>
+            <artifactId>ffm-model</artifactId>
             <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>

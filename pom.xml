@@ -10,11 +10,11 @@
     </parent>
 
     <groupId>ch.fronis</groupId>
-    <artifactId>fronis-backend</artifactId>
+    <artifactId>ffm-backend</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>Fronis Backend</name>
-    <description>Fronis Backend</description>
+    <name>FFM Backend</name>
+    <description>FFM Backend</description>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
@@ -23,10 +23,10 @@
     </properties>
 
     <modules>
-        <module>fronis-data</module>
-        <module>fronis-model</module>
-        <module>fronis-app</module>
-        <module>fronis-admin</module>
+        <module>ffm-data</module>
+        <module>ffm-model</module>
+        <module>ffm-app</module>
+        <module>ffm-admin</module>
     </modules>
 
     <dependencies>

@@ -6,15 +6,15 @@
 
     <parent>
         <groupId>ch.fronis</groupId>
-        <artifactId>fronis-backend</artifactId>
+        <artifactId>ffm-backend</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fronis-admin</artifactId>
+    <artifactId>ffm-admin</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>Fronis Admin</name>
-    <description>Fronis Admin</description>
+    <name>FFM Admin</name>
+    <description>FFM Admin</description>
 
     <properties>
         <start-class>ch.fronis.admin.Application</start-class>
@@ -47,14 +47,14 @@
         </dependency>
         <dependency>
             <groupId>ch.fronis</groupId>
-            <artifactId>fronis-model</artifactId>
+            <artifactId>ffm-model</artifactId>
             <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>ch.fronis</groupId>
-            <artifactId>fronis-data</artifactId>
+            <artifactId>ffm-data</artifactId>
             <version>0.0.1</version>
         </dependency>
 

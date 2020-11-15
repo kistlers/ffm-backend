@@ -6,15 +6,15 @@
 
     <parent>
         <groupId>ch.fronis</groupId>
-        <artifactId>fronis-backend</artifactId>
+        <artifactId>ffm-backend</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fronis-model</artifactId>
+    <artifactId>ffm-model</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>Fronis Model</name>
-    <description>Fronis Model</description>
+    <name>FFM Model</name>
+    <description>FFM Model</description>
 
     <build>
         <finalName>${project.artifactId}</finalName>
