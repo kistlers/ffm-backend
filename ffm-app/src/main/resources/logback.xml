@@ -23,7 +23,7 @@
         </triggeringPolicy>
     </appender>
 
-    <logger name="ch.fronis" level="DEBUG"/>
+    <logger name="ch.ffm" level="DEBUG"/>
     <!--<logger name="org.springframework.web" level="DEBUG" />  -->
     <!-- <logger name="org.springframework.jdbc.core" level="TRACE" /> -->
     <root level="INFO">
