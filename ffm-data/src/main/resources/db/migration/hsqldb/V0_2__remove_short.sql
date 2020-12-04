@@ -1,1 +1,0 @@
-alter table t_player drop column short_name;
