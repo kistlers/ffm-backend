@@ -6,6 +6,7 @@ import ch.ffm.model.reactadmin.DeletedResponse;
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import java.text.MessageFormat;
 import java.util.List;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,16 +37,20 @@ public class AdminPlayerController {
     }
 
     @GetMapping({"", "/"})
-    public ResponseEntity<List<Player>> allPlayers(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
+    public ResponseEntity<List<Player>> allPlayers(@RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "10") Integer perPage,
             @RequestParam(required = false, defaultValue = "id") String field,
             @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order,
             @RequestParam(required = false, value = "q") String query) {
-        PageRequest request = PageRequest.of(page, perPage, Sort.by(order, field));
-        Page<Player> result = playerRepository
-                .findAllByFirstNameEqualsIgnoreCaseAndLastNameEqualsIgnoreCaseOrderByPlayerNumberAsc(
-                        query, query, request);
+        var pageRequest = PageRequest.of(page, perPage, Sort.by(order, field));
+
+        Page<Player> result;
+        if (!Strings.isBlank(query)) {
+            result = playerRepository.findAllByFirstNameEqualsIgnoreCaseAndLastNameEqualsIgnoreCaseOrderByPlayerNumberAsc(query, query, pageRequest);
+        } else {
+            result = playerRepository.findAll(pageRequest);
+        }
+
         return ResponseEntity.ok()
                 .header("Content-Range", perPage + "/" + result.getTotalElements())
                 .body(result.getContent());
@@ -78,8 +83,8 @@ public class AdminPlayerController {
                         player.setImage(newPlayer.getImage());
                         return playerRepository.save(player);
                     })
-                    .orElseThrow(() -> new RuntimeException(String.format(
-                            "Cannot handle player PUT request. Player with id=%d not found", playerId)));
+                    .orElseThrow(() -> new RuntimeException(MessageFormat.format(
+                            "Cannot handle player PUT request. Player with id={0} not found", playerId)));
         } catch (JpaSystemException e) {
             if (PacketTooBigException.class.equals(e.getCause().getClass())) {
                 logger.info(MessageFormat.format(

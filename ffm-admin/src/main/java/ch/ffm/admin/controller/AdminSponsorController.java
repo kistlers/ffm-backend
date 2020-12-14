@@ -41,8 +41,8 @@ public class AdminSponsorController {
             @RequestParam(required = false, defaultValue = "10") Integer perPage,
             @RequestParam(required = false, defaultValue = "id") String field,
             @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order) {
-        PageRequest request = PageRequest.of(page, perPage, Sort.by(order, field));
-        Page<Sponsor> result = sponsorRepository.findAllByOrderByOrderingAsc(request);
+        var request = PageRequest.of(page, perPage, Sort.by(order, field));
+        var result = sponsorRepository.findAllByOrderByOrderingAsc(request);
         return ResponseEntity.ok()
                 .header("Content-Range", perPage + "/" + result.getTotalElements())
                 .body(result.getContent());
@@ -72,8 +72,8 @@ public class AdminSponsorController {
                         sponsor.setOrdering(newSponsor.getOrdering());
                         return sponsorRepository.save(sponsor);
                     }).orElseThrow(() ->
-                            new RuntimeException(String.format(
-                                    "Cannot handle sponsor PUT request. Sponsor with id=%d not found", sponsorId)));
+                            new RuntimeException(MessageFormat.format(
+                                    "Cannot handle sponsor PUT request. Sponsor with id={0} not found", sponsorId)));
         } catch (JpaSystemException e) {
             if (PacketTooBigException.class.equals(e.getCause().getClass())) {
                 logger.info("Max image size exceeded. Upload a smaller image. (sponsorId={})", sponsorId);
