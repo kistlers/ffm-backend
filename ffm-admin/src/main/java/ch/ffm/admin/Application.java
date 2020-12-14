@@ -9,8 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@SpringBootApplication(
-        scanBasePackages = {"ch.ffm.admin.config", "ch.ffm.admin.controller"})
+@SpringBootApplication(scanBasePackages = {"ch.ffm.admin.config", "ch.ffm.admin.controller"})
 @EntityScan("ch.ffm.model.entity")
 @EnableJpaRepositories("ch.ffm.data.repository")
 public class Application {

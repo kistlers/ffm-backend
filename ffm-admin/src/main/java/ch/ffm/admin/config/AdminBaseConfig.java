@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -75,20 +76,6 @@ public abstract class AdminBaseConfig implements SchedulingConfigurer, WebMvcCon
         interceptorRegistry.addInterceptor(new LogRequestInterceptor());
     }
 
-    //    @Bean
-    //    public FilterRegistrationBean<CorsFilter> corsFilter() {
-    //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //        CorsConfiguration config = new CorsConfiguration();
-    //        config.setAllowCredentials(true);
-    //        config.addAllowedOrigin("https://r22.internet-box.ch/");
-    //        config.addAllowedOrigin("http://localhost:3006");
-    //        config.addAllowedHeader("*");
-    //        config.addAllowedMethod("*");
-    //        config.addExposedHeader("Content-Range");
-    //        source.registerCorsConfiguration("/**", config);
-    //        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new
-    // CorsFilter(source));
-    //        bean.setOrder(0);
-    //        return bean;
-    //    }
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {}
 }

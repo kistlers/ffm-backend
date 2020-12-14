@@ -40,7 +40,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         for (Map.Entry<String, String> adminUser : adminUsers.entrySet()) {
-            logger.info("registered login for admin user " + adminUser.getKey());
+            logger.info("registered login for admin user {}", adminUser.getKey());
             auth.inMemoryAuthentication().withUser(adminUser.getKey()).password(adminUser.getValue()).roles("ADMIN");
         }
     }
