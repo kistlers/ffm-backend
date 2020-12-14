@@ -1,12 +1,13 @@
 package ch.ffm.app.config;
 
+import org.springframework.http.ResponseEntity;
+
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.TimeZone;
-import org.springframework.http.ResponseEntity;
 
 public class HeaderHelper {
 
@@ -24,8 +25,7 @@ public class HeaderHelper {
     }
 
     public static <T> ResponseEntity<T> createOKResponseEntity(T body, int nextRefreshSeconds, int maxAgeSeconds) {
-        return ResponseEntity.ok().header(CACHE_CONTROL, MAX_AGE + "=" + maxAgeSeconds)
-            .header(NEXT_REFRESH, createNextRefreshValue(nextRefreshSeconds)).body(body);
+        return ResponseEntity.ok().header(CACHE_CONTROL, MAX_AGE + "=" + maxAgeSeconds).header(NEXT_REFRESH, createNextRefreshValue(nextRefreshSeconds)).body(body);
     }
 
     public static <T> ResponseEntity<T> createOKResponseEntityDefaultCacheControl(T body) {

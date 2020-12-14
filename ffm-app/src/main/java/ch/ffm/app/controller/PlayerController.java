@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/players")
 public class PlayerController {
 
     private final PlayerRepository playerRepository;
@@ -24,11 +24,11 @@ public class PlayerController {
     /**
      * @return players ordered by number ascending and nulls last
      */
-    @GetMapping("/players")
+    @GetMapping({"", "/"})
     public ResponseEntity<List<Player>> players() {
         var players = playerRepository.findAllByOrderByPlayerNumberAsc().stream()
-            .sorted(Comparator.comparing(Player::getPlayerNumber, Comparator.nullsLast(Comparator.naturalOrder())))
-            .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Player::getPlayerNumber, Comparator.nullsLast(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
         return HeaderHelper.createOKResponseEntityDefaultCacheControl(players);
     }
 }

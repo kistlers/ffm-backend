@@ -4,6 +4,7 @@ import ch.ffm.data.repository.SponsorRepository;
 import ch.ffm.model.entity.Sponsor;
 import ch.ffm.model.reactadmin.DeletedResponse;
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
+import java.text.MessageFormat;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/sponsors")
 public class AdminSponsorController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminSponsorController.class);
@@ -34,7 +35,7 @@ public class AdminSponsorController {
         this.sponsorRepository = sponsorRepository;
     }
 
-    @GetMapping("/sponsors")
+    @GetMapping({"", "/"})
     public ResponseEntity<List<Sponsor>> allSponsors(
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "10") Integer perPage,
@@ -47,19 +48,19 @@ public class AdminSponsorController {
                 .body(result.getContent());
     }
 
-    @GetMapping("/sponsors/{sponsorId}")
-    public Sponsor oneSponsor(@PathVariable Integer sponsorId) throws RuntimeException {
+    @GetMapping("/{sponsorId}")
+    public Sponsor oneSponsor(@PathVariable Integer sponsorId) {
         return sponsorRepository.findById(sponsorId)
-                .orElseThrow(() -> new RuntimeException(
-                        String.format("Cannot handle sponsor GET request. Sponsor with id=%d not found", sponsorId)));
+                .orElseThrow(() -> new RuntimeException(MessageFormat
+                        .format("Cannot handle sponsor GET request. Sponsor with id={0} not found", sponsorId)));
     }
 
-    @PostMapping("/sponsors")
+    @PostMapping({"", "/"})
     public Sponsor newSponsor(@RequestBody Sponsor newSponsor) {
         return sponsorRepository.save(newSponsor);
     }
 
-    @PutMapping("/sponsors/{sponsorId}")
+    @PutMapping("/{sponsorId}")
     public Sponsor replaceSponsor(@RequestBody Sponsor newSponsor, @PathVariable Integer sponsorId)
             throws PacketTooBigException {
         try {
@@ -75,17 +76,16 @@ public class AdminSponsorController {
                                     "Cannot handle sponsor PUT request. Sponsor with id=%d not found", sponsorId)));
         } catch (JpaSystemException e) {
             if (PacketTooBigException.class.equals(e.getCause().getClass())) {
-                logger.info("Max image size exceeded. Upload a smaller image. (sponsorId=" + sponsorId + ")");
+                logger.info("Max image size exceeded. Upload a smaller image. (sponsorId={})", sponsorId);
                 throw new PacketTooBigException("Max image size exceeded. Upload a smaller image.");
             }
             throw e;
         }
     }
 
-    @DeleteMapping("/sponsors/{sponsorId}")
+    @DeleteMapping("/{sponsorId}")
     public ResponseEntity<DeletedResponse> deleteSponsor(@PathVariable Integer sponsorId) {
         sponsorRepository.deleteById(sponsorId);
-        logger.info("deleted sponsor with id: " + sponsorId);
         return ResponseEntity.ok().body(new DeletedResponse(sponsorId));
     }
 }
