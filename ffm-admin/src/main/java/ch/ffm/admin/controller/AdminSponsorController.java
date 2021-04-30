@@ -41,8 +41,8 @@ public class AdminSponsorController {
             @RequestParam(required = false, defaultValue = "10") Integer perPage,
             @RequestParam(required = false, defaultValue = "id") String field,
             @RequestParam(required = false, defaultValue = "DESC") Sort.Direction order) {
-        var request = PageRequest.of(page, perPage, Sort.by(order, field));
-        var result = sponsorRepository.findAllByOrderByOrderingAsc(request);
+        final var request = PageRequest.of(page, perPage, Sort.by(order, field));
+        final var result = sponsorRepository.findAllByOrderByOrderingAsc(request);
         return ResponseEntity.ok()
                 .header("Content-Range", perPage + "/" + result.getTotalElements())
                 .body(result.getContent());
