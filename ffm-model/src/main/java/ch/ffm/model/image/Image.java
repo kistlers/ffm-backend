@@ -6,8 +6,8 @@ public class Image implements Serializable {
 
     private String data;
 
-    public static Image from(String data) {
-        var image = new Image();
+    public static Image from(final String data) {
+        final var image = new Image();
         image.setData(data);
         return image;
     }

@@ -27,8 +27,8 @@ public class News {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "publish_timestamp", nullable = false)
-    private ZonedDateTime publishTimestamp;
+    @Column(name = "created_at", nullable = false)
+    private ZonedDateTime createdAt;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -60,12 +60,12 @@ public class News {
         this.text = text;
     }
 
-    public ZonedDateTime getPublishTimestamp() {
-        return publishTimestamp;
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPublishTimestamp(ZonedDateTime publishTimestamp) {
-        this.publishTimestamp = publishTimestamp;
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Image getImage() {

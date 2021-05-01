@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 public interface NewsRepository
         extends JpaRepository<News, Integer>, JpaSpecificationExecutor<News> {
 
-    List<News> findAllByOrderByPublishTimestampDesc();
+    List<News> findAllByOrderByCreatedAtDesc();
 }

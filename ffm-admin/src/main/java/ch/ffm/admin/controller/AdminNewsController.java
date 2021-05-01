@@ -1,17 +1,15 @@
 package ch.ffm.admin.controller;
 
 import ch.ffm.data.repository.NewsRepository;
-import ch.ffm.data.repository.PlayerRepository;
 import ch.ffm.model.entity.News;
-import ch.ffm.model.entity.Player;
 import ch.ffm.model.reactadmin.DeletedResponse;
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import java.text.MessageFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
-import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -54,12 +52,12 @@ public class AdminNewsController {
     public News oneNews(@PathVariable Integer newsId) {
         return newsRepository.findById(newsId).orElseThrow(
                 () -> new RuntimeException(MessageFormat.format(
-                        "Cannot handle news GET request. News with id={0} not found", newsId))
-        );
+                        "Cannot handle news GET request. News with id={0} not found", newsId)));
     }
 
     @PostMapping({"", "/"})
     public News newNews(@RequestBody News newNews) {
+        newNews.setCreatedAt(ZonedDateTime.now(ZoneId.of("Europe/Zurich")));
         return newsRepository.save(newNews);
     }
 
@@ -71,7 +69,6 @@ public class AdminNewsController {
                     .map(news -> {
                         news.setTitle(newNews.getTitle());
                         news.setText(newNews.getText());
-                        news.setPublishTimestamp(newNews.getPublishTimestamp());
                         news.setImage(newNews.getImage());
                         return newsRepository.save(news);
                     })

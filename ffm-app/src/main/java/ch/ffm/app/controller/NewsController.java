@@ -24,7 +24,7 @@ public class NewsController {
      */
     @GetMapping({"", "/"})
     public ResponseEntity<List<News>> news() {
-        var players = newsRepository.findAllByOrderByPublishTimestampDesc();
-        return HeaderHelper.createOKResponseEntityDefaultCacheControl(players);
+        var news = newsRepository.findAllByOrderByCreatedAtDesc();
+        return HeaderHelper.createOKResponseEntityDefaultCacheControl(news);
     }
 }

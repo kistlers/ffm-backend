@@ -5,6 +5,4 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("dev")
-public class AdminDevConfig extends AdminBaseConfig {
-
-}
+public class AdminDevConfig extends AdminBaseConfig {}
