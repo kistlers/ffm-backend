@@ -29,5 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
-/fronis-*.log
-/fronis-*.log.*
+ffm-*.log
+ffm-*.log.*

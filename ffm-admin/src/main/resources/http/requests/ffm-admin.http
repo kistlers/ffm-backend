@@ -1,0 +1,56 @@
+### login
+POST {{baseUrl}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username={{username}}&password={{password}}
+
+> {%
+    if (response.status === 200) {
+        var setCookieHeader = response.headers.valueOf("set-cookie");
+        var setCookies = setCookieHeader.split(";");
+        for (var i = 0; i < setCookies.length; i++) {
+            var setCookie = setCookies[i].trim();
+            if (setCookie.startsWith("JSESSIONID=")) {
+                client.log("setting cookies: " + setCookie);
+                client.global.set("cookies", setCookie);
+            }
+        }
+    }
+%}
+
+### logout
+POST {{baseUrl}}/logout
+Accept: application/json
+Cookie: {{cookies}}
+
+### all players
+GET {{baseUrl}}/v1/players
+
+### all players query
+GET {{baseUrl}}/v1/players?query=st
+
+### player id 1
+GET {{baseUrl}}/v1/players/1
+
+
+### player id 1
+PUT {{baseUrl}}/v1/players/1
+Content-Type: application/json
+
+{
+  "firstName": "Severin",
+  "lastName": "renamed",
+  "playerNumber": "29"
+}
+
+
+### player id 5684 (fails)
+PUT {{baseUrl}}/v1/players/17
+Content-Type: application/json
+
+{
+  "firstName": "Nicolas",
+  "lastName": "Kistler",
+  "playerNumber": "29"
+}
+

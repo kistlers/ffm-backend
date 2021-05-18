@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.5.0-M2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>ch.fronis</groupId>
-    <artifactId>fronis-backend</artifactId>
+    <groupId>ch.ffm</groupId>
+    <artifactId>ffm-backend</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>Fronis Backend</name>
-    <description>Fronis Backend</description>
+    <name>FFM Backend</name>
+    <description>FFM Backend</description>
 
     <properties>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>10</maven.compiler.target>
+        <java.version>11</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
-        <module>fronis-data</module>
-        <module>fronis-model</module>
-        <module>fronis-app</module>
-        <module>fronis-admin</module>
+        <module>ffm-data</module>
+        <module>ffm-model</module>
+        <module>ffm-app</module>
+        <module>ffm-admin</module>
     </modules>
 
     <dependencies>
@@ -46,15 +47,17 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.20</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,6 +82,10 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -98,16 +105,8 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <release>${maven.compiler.target}</release>
-                        <source>${maven.compiler.target}</source>
-                        <target>${maven.compiler.source}</target>
-                        <compilerArgs>
-                            <arg>-parameters</arg>
-                        </compilerArgs>
-                    </configuration>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -118,11 +117,23 @@
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
         </repository>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
         </pluginRepository>
     </pluginRepositories>
 
